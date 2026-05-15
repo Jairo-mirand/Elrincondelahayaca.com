@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>El Rincón de las Hayacas | Sabor Tradicional Colombiano</title>
+    <title>El Rincón de la Hayaca | Sabor Tradicional Colombiano</title>
     <meta name="description" content="Descubre el auténtico sabor de las hayacas tradicionales colombianas">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Lato:wght@300;400;700&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -11,10 +11,15 @@
 </head>
 <body>
 
+    <div class="progress-bar" id="progressBar"></div>
+
     <!-- Navbar -->
-    <nav class="navbar">
+    <nav class="navbar" id="navbar">
         <div class="container">
-            <a href="#inicio" class="logo">El Rincón de las Hayacas</a>
+            <a href="#inicio" class="logo-wrap">
+                <img src="logo.png" alt="Logo" class="logo-img" loading="lazy">
+                <span class="logo">El Rincón de la Hayaca</span>
+            </a>
             <button class="hamburger" id="hamburger" aria-label="Menú">
                 <span></span>
                 <span></span>
@@ -36,18 +41,28 @@
 
     <!-- Hero -->
     <section class="hero" id="inicio">
-        <div class="hero-bg">
+        <div class="hero-bg" id="heroBg">
             <img src="https://storage.googleapis.com/blink-core-storage/projects/elrincon-website-33kmr9q8/ai-images/1777423226271-a7482849-7626-41ed-b824-a51e8d9007f5.png" alt="Hayacas">
         </div>
         <div class="hero-overlay"></div>
-        <div class="hero-content fade-in">
-            <h1>El Rincón de las Hayacas</h1>
-            <p>"Sabor tradicional hecho con amor en casa, directamente a tu mesa."</p>
+        <div class="hero-particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+        </div>
+        <div class="hero-content">
+            <h1>El Rincón de la Hayaca</h1>
+            <p class="hero-subtitle"><span id="typewriter"></span><span class="cursor"></span></p>
             <div class="hero-buttons">
-                <a href="https://wa.me/573000000000" target="_blank" class="btn btn-primary">
+                <a href="https://wa.me/573000000000" target="_blank" class="btn btn-primary ripple-btn">
                     <i class="fab fa-whatsapp"></i> Haz tu pedido hoy
                 </a>
-                <a href="#catalogo" class="btn btn-outline">Ver menú</a>
+                <a href="#catalogo" class="btn btn-outline ripple-btn">Ver menú</a>
             </div>
         </div>
         <div class="scroll-indicator">
@@ -56,28 +71,28 @@
     </section>
 
     <!-- About -->
-    <section class="about" id="nosotros">
+    <section class="about pattern-bg" id="nosotros">
         <div class="container">
             <div class="about-content">
-                <div class="about-image fade-in">
-                    <img src="https://storage.googleapis.com/blink-core-storage/projects/elrincon-website-33kmr9q8/ai-images/1777423238277-d71146ef-7e4a-418b-83f9-8cb33942ae2d.png" alt="Familia">
+                <div class="about-image reveal-left">
+                    <img src="https://storage.googleapis.com/blink-core-storage/projects/elrincon-website-33kmr9q8/ai-images/1777423238277-d71146ef-7e4a-418b-83f9-8cb33942ae2d.png" alt="Familia" loading="lazy">
                     <div class="about-badge">
-                        <span>10+</span>
+                        <span id="yearsCounter">0</span>
                         <span>Años de tradición</span>
                     </div>
                 </div>
-                <div class="about-text fade-in">
+                <div class="about-text reveal-right">
                     <h2>Nuestra Historia Familiar</h2>
                     <div class="divider"></div>
-                    <p>El Rincón de las Hayacas nació en el corazón de nuestra cocina familiar. Lo que comenzó como un regalo para amigos en fechas especiales, se convirtió en una pasión por compartir el auténtico sabor de nuestras raíces colombianas.</p>
+                    <p>El Rincón de la Hayaca nació en el corazón de nuestra cocina familiar. Lo que comenzó como un regalo para amigos en fechas especiales, se convirtió en una pasión por compartir el auténtico sabor de nuestras raíces colombianas.</p>
                     <p>Cada hayaca es una obra de arte culinaria, preparada a mano con masa de maíz tierno, carnes seleccionadas y nuestro secreto familiar de especias.</p>
                     <div class="about-values">
                         <div class="value-item">
-                            <h4>Misión</h4>
+                            <h4><i class="fas fa-bullseye"></i> Misión</h4>
                             <p>Preservar y compartir la tradición artesanal de la cocina colombiana.</p>
                         </div>
                         <div class="value-item">
-                            <h4>Valores</h4>
+                            <h4><i class="fas fa-heart"></i> Valores</h4>
                             <p>Honestidad en ingredientes, amor por lo hecho a mano y calidez.</p>
                         </div>
                     </div>
@@ -87,16 +102,16 @@
     </section>
 
     <!-- Products -->
-    <section class="products" id="catalogo">
+    <section class="products pattern-bg pattern-light" id="catalogo">
         <div class="container">
-            <div class="section-header fade-in">
+            <div class="section-header reveal">
                 <h2>Nuestro Menú</h2>
                 <p>Elige tus favoritas y disfruta del sabor artesanal de casa.</p>
             </div>
-            <div class="products-grid">
-                <div class="product-card fade-in">
+            <div class="products-grid" id="productsGrid">
+                <div class="product-card tilt-card reveal" data-delay="0">
                     <div class="product-image">
-                        <img src="https://storage.googleapis.com/blink-core-storage/projects/elrincon-website-33kmr9q8/ai-images/1777423238279-2f8f8ee9-79b0-4389-aba5-8290307caaec.png" alt="Hayaca Cerdo">
+                        <img src="https://storage.googleapis.com/blink-core-storage/projects/elrincon-website-33kmr9q8/ai-images/1777423238279-2f8f8ee9-79b0-4389-aba5-8290307caaec.png" alt="Hayaca Cerdo" loading="lazy">
                         <span class="product-badge"><i class="fas fa-star"></i> Más Vendido</span>
                     </div>
                     <div class="product-info">
@@ -107,15 +122,15 @@
                         <p>Masa de maíz tierno con jugoso guiso de cerdo, vegetales frescos y aceitunas.</p>
                         <div class="product-footer">
                             <span class="product-price">$12,000</span>
-                            <a href="https://wa.me/573000000000?text=Hola, quisiera pedir: Hayaca Tradicional de Cerdo" target="_blank" class="product-btn">
+                            <a href="https://wa.me/573000000000?text=Hola, quisiera pedir: Hayaca Tradicional de Cerdo" target="_blank" class="product-btn ripple-btn">
                                 <i class="fas fa-shopping-cart"></i>
                             </a>
                         </div>
                     </div>
                 </div>
-                <div class="product-card fade-in">
+                <div class="product-card tilt-card reveal" data-delay="150">
                     <div class="product-image">
-                        <img src="https://storage.googleapis.com/blink-core-storage/projects/elrincon-website-33kmr9q8/ai-images/1777423238279-ce4a2585-3f09-40c4-9cdf-c6873646017c.png" alt="Hayaca Pollo">
+                        <img src="https://storage.googleapis.com/blink-core-storage/projects/elrincon-website-33kmr9q8/ai-images/1777423238279-ce4a2585-3f09-40c4-9cdf-c6873646017c.png" alt="Hayaca Pollo" loading="lazy">
                     </div>
                     <div class="product-info">
                         <div class="product-header">
@@ -125,15 +140,15 @@
                         <p>Delicada pechuga desmechada con el toque secreto de la abuela.</p>
                         <div class="product-footer">
                             <span class="product-price">$11,000</span>
-                            <a href="https://wa.me/573000000000?text=Hola, quisiera pedir: Hayaca Especial de Pollo" target="_blank" class="product-btn">
+                            <a href="https://wa.me/573000000000?text=Hola, quisiera pedir: Hayaca Especial de Pollo" target="_blank" class="product-btn ripple-btn">
                                 <i class="fas fa-shopping-cart"></i>
                             </a>
                         </div>
                     </div>
                 </div>
-                <div class="product-card fade-in">
+                <div class="product-card tilt-card reveal" data-delay="300">
                     <div class="product-image">
-                        <img src="https://storage.googleapis.com/blink-core-storage/projects/elrincon-website-33kmr9q8/ai-images/1777423238277-d71146ef-7e4a-418b-83f9-8cb33942ae2d.png" alt="Hayaca Mixta">
+                        <img src="https://storage.googleapis.com/blink-core-storage/projects/elrincon-website-33kmr9q8/ai-images/1777423238277-d71146ef-7e4a-418b-83f9-8cb33942ae2d.png" alt="Hayaca Mixta" loading="lazy">
                         <span class="product-badge"><i class="fas fa-star"></i> Más Vendido</span>
                     </div>
                     <div class="product-info">
@@ -144,7 +159,7 @@
                         <p>Lo mejor de ambos mundos en una misma masa.</p>
                         <div class="product-footer">
                             <span class="product-price">$14,000</span>
-                            <a href="https://wa.me/573000000000?text=Hola, quisiera pedir: Hayaca Mixta" target="_blank" class="product-btn">
+                            <a href="https://wa.me/573000000000?text=Hola, quisiera pedir: Hayaca Mixta" target="_blank" class="product-btn ripple-btn">
                                 <i class="fas fa-shopping-cart"></i>
                             </a>
                         </div>
@@ -153,11 +168,11 @@
             </div>
 
             <!-- Combos -->
-            <div class="combos-section fade-in">
+            <div class="combos-section reveal">
                 <h3>Combos y Promociones</h3>
                 <div class="combos-grid">
                     <div class="combo-card">
-                        <img src="https://storage.googleapis.com/blink-core-storage/projects/elrincon-website-33kmr9q8/ai-images/1777423226271-a7482849-7626-41ed-b824-a51e8d9007f5.png" alt="Combo">
+                        <img src="https://storage.googleapis.com/blink-core-storage/projects/elrincon-website-33kmr9q8/ai-images/1777423226271-a7482849-7626-41ed-b824-a51e8d9007f5.png" alt="Combo" loading="lazy">
                         <div class="combo-info">
                             <h4>Combo Familiar (6 Unidades)</h4>
                             <p>Mezcla tus sabores favoritos y recibe un descuento especial.</p>
@@ -169,7 +184,7 @@
                     </div>
                     <div class="combo-cta">
                         <p>"Perfectos para reuniones familiares o eventos especiales."</p>
-                        <a href="https://wa.me/573000000000?text=Información sobre combos familiares" target="_blank" class="combo-btn">Consultar Disponibilidad</a>
+                        <a href="https://wa.me/573000000000?text=Información sobre combos familiares" target="_blank" class="combo-btn ripple-btn">Consultar Disponibilidad</a>
                     </div>
                 </div>
             </div>
@@ -179,24 +194,26 @@
     <!-- Gallery -->
     <section class="gallery" id="galeria">
         <div class="container">
-            <div class="section-header fade-in">
+            <div class="section-header reveal">
                 <h2>Proceso Artesanal</h2>
                 <p>Desde la cocina hasta tu mesa, cuidamos cada detalle.</p>
             </div>
             <div class="gallery-grid">
-                <div class="gallery-item gallery-video fade-in">
-                    <img src="https://storage.googleapis.com/blink-core-storage/projects/elrincon-website-33kmr9q8/ai-images/1777423226271-a7482849-7626-41ed-b824-a51e8d9007f5.png" alt="Video">
-                    <div class="video-play"><i class="fas fa-play"></i></div>
+                <div class="gallery-item gallery-video reveal" data-delay="0">
+                    <img src="https://storage.googleapis.com/blink-core-storage/projects/elrincon-website-33kmr9q8/ai-images/1777423226271-a7482849-7626-41ed-b824-a51e8d9007f5.png" alt="Video proceso" loading="lazy">
+                    <div class="gallery-overlay"><i class="fas fa-play"></i></div>
                     <div class="video-text">
                         <h4>Cómo hacemos nuestras hayacas</h4>
                         <p>Un vistazo a nuestro secreto familiar</p>
                     </div>
                 </div>
-                <div class="gallery-item fade-in">
-                    <img src="https://storage.googleapis.com/blink-core-storage/projects/elrincon-website-33kmr9q8/ai-images/1777423238277-d71146ef-7e4a-418b-83f9-8cb33942ae2d.png" alt="Galería">
+                <div class="gallery-item reveal" data-delay="150">
+                    <img src="https://storage.googleapis.com/blink-core-storage/projects/elrincon-website-33kmr9q8/ai-images/1777423238277-d71146ef-7e4a-418b-83f9-8cb33942ae2d.png" alt="Galería 1" loading="lazy">
+                    <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
                 </div>
-                <div class="gallery-item fade-in">
-                    <img src="https://storage.googleapis.com/blink-core-storage/projects/elrincon-website-33kmr9q8/ai-images/1777423238279-2f8f8ee9-79b0-4389-aba5-8290307caaec.png" alt="Galería">
+                <div class="gallery-item reveal" data-delay="300">
+                    <img src="https://storage.googleapis.com/blink-core-storage/projects/elrincon-website-33kmr9q8/ai-images/1777423238279-2f8f8ee9-79b0-4389-aba5-8290307caaec.png" alt="Galería 2" loading="lazy">
+                    <div class="gallery-overlay"><i class="fas fa-search-plus"></i></div>
                 </div>
             </div>
         </div>
@@ -211,41 +228,49 @@
         <span class="lightbox-counter" id="lightbox-counter"></span>
     </div>
 
+    <!-- Video Modal -->
+    <div class="video-modal" id="videoModal">
+        <div class="video-modal-content">
+            <button class="video-modal-close" id="videoModalClose">&times;</button>
+            <iframe id="videoFrame" src="" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="Video proceso"></iframe>
+        </div>
+    </div>
+
     <!-- How to Order -->
-    <section class="how-to-order" id="pedidos">
+    <section class="how-to-order pattern-bg" id="pedidos">
         <div class="container">
             <div class="order-content">
-                <div class="order-info fade-in">
+                <div class="order-info reveal-left">
                     <h2>Cómo Hacer tu Pedido</h2>
-                    <p>¡Es muy sencilla! Sigue estos pasos.</p>
+                    <p>¡Es muy sencillo! Sigue estos pasos.</p>
                     <div class="order-steps">
                         <div class="order-step">
                             <div class="step-icon"><i class="fab fa-whatsapp"></i></div>
                             <div class="step-info">
                                 <h4>Escríbenos</h4>
-                                <p>Envíanos un mensaje por WhatsApp.</p>
+                                <p>Envíanos un mensaje por WhatsApp con tu pedido.</p>
                             </div>
                         </div>
                         <div class="order-step">
                             <div class="step-icon"><i class="fas fa-check-circle"></i></div>
                             <div class="step-info">
                                 <h4>Confirma</h4>
-                                <p>Te confirmamos disponibilidad y total.</p>
+                                <p>Te confirmamos disponibilidad, total y tiempo de entrega.</p>
                             </div>
                         </div>
                         <div class="order-step">
                             <div class="step-icon"><i class="fas fa-truck"></i></div>
                             <div class="step-info">
                                 <h4>Recibe</h4>
-                                <p>Entregamos en la puerta de tu casa.</p>
+                                <p>Entregamos en la puerta de tu casa, bien empacado y fresco.</p>
                             </div>
                         </div>
                     </div>
-                    <a href="https://wa.me/573000000000" target="_blank" class="order-btn">
+                    <a href="https://wa.me/573000000000" target="_blank" class="order-btn ripple-btn">
                         <i class="fab fa-whatsapp"></i> Iniciar pedido ahora
                     </a>
                 </div>
-                <div class="delivery-info fade-in">
+                <div class="delivery-info reveal-right">
                     <h3><i class="fas fa-truck"></i> Zonas y Horarios</h3>
                     <div class="zones-list">
                         <h4>Zonas de Cobertura</h4>
@@ -277,7 +302,7 @@
     <section class="contact" id="contacto">
         <div class="container">
             <div class="contact-grid">
-                <div class="contact-info fade-in">
+                <div class="contact-info reveal-left">
                     <h2>Contacto</h2>
                     <p>Estamos listos para atenderte con la calidez de siempre.</p>
                     <div class="contact-items">
@@ -312,7 +337,7 @@
                         <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
                     </div>
                 </div>
-                <div class="contact-form-box fade-in">
+                <div class="contact-form-box reveal-right">
                     <h3>Envíanos un Mensaje</h3>
                     <form id="contact-form" action="https://formspree.io/f/xxxxx" method="POST">
                         <div class="form-grid">
@@ -337,7 +362,7 @@
                                 <span class="form-error"></span>
                             </div>
                         </div>
-                        <button type="submit" class="submit-btn" id="submit-btn">
+                        <button type="submit" class="submit-btn ripple-btn" id="submit-btn">
                             <i class="fas fa-paper-plane"></i> Enviar Mensaje
                         </button>
                     </form>
@@ -358,8 +383,8 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-grid">
-                <div class="footer-brand fade-in">
-                    <h3>El Rincón de las Hayacas</h3>
+                <div class="footer-brand reveal">
+                    <h3>El Rincón de la Hayaca</h3>
                     <p>"Llevando la esencia de nuestra familia y el sabor auténtico de la tradición colombiana a cada rincón de la ciudad."</p>
                     <div class="footer-social">
                         <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
@@ -388,11 +413,16 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <span>© 2024 El Rincón de las Hayacas. Todos los derechos reservados.</span>
+                <span>&copy; 2024 El Rincón de la Hayaca. Todos los derechos reservados.</span>
                 <span><i class="fas fa-heart"></i> Hecho con amor por una familia colombiana.</span>
             </div>
         </div>
     </footer>
+
+    <!-- Back to Top -->
+    <button class="back-to-top" id="backToTop" aria-label="Volver arriba">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
     <!-- WhatsApp Float -->
     <a href="https://wa.me/573000000000" target="_blank" class="whatsapp-float">

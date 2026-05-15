@@ -1,13 +1,84 @@
 document.addEventListener('DOMContentLoaded', function () {
 
+    // ─── Navbar Scroll Effect ───
+    var navbar = document.getElementById('navbar');
+    var heroBg = document.getElementById('heroBg');
+
+    function handleNavbar() {
+        if (window.scrollY > 60) {
+            navbar.classList.add('scrolled');
+        } else {
+            navbar.classList.remove('scrolled');
+        }
+    }
+
+    window.addEventListener('scroll', handleNavbar, { passive: true });
+    handleNavbar();
+
+    // ─── Hero Parallax ───
+    function handleParallax() {
+        if (heroBg) {
+            var offset = window.scrollY * 0.35;
+            heroBg.style.transform = 'translateY(' + offset + 'px)';
+        }
+    }
+
+    window.addEventListener('scroll', handleParallax, { passive: true });
+
+    // ─── Typewriter Effect ───
+    var typewriterEl = document.getElementById('typewriter');
+    if (typewriterEl) {
+        var text = '"Sabor tradicional hecho con amor en casa, directamente a tu mesa."';
+        var charIndex = 0;
+
+        function typeChar() {
+            if (charIndex < text.length) {
+                typewriterEl.textContent += text.charAt(charIndex);
+                charIndex++;
+                setTimeout(typeChar, 45);
+            }
+        }
+
+        setTimeout(typeChar, 1200);
+    }
+
+    // ─── Counter Animation (Years) ───
+    var yearsCounter = document.getElementById('yearsCounter');
+    if (yearsCounter) {
+        var counterAnimated = false;
+
+        var counterObserver = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting && !counterAnimated) {
+                    counterAnimated = true;
+                    var target = 10;
+                    var current = 0;
+                    var step = Math.ceil(target / 40);
+
+                    var interval = setInterval(function () {
+                        current += step;
+                        if (current >= target) {
+                            current = target;
+                            clearInterval(interval);
+                        }
+                        yearsCounter.textContent = current + '+';
+                    }, 40);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        counterObserver.observe(yearsCounter);
+    }
+
     // ─── Mobile Menu Toggle ───
-    const hamburger = document.getElementById('hamburger');
-    const navLinks = document.querySelector('.nav-links');
+    var hamburger = document.getElementById('hamburger');
+    var navLinks = document.querySelector('.nav-links');
 
     if (hamburger) {
         hamburger.addEventListener('click', function () {
             hamburger.classList.toggle('active');
             navLinks.classList.toggle('open');
+            document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
         });
     }
 
@@ -15,6 +86,7 @@ document.addEventListener('DOMContentLoaded', function () {
         link.addEventListener('click', function () {
             hamburger.classList.remove('active');
             navLinks.classList.remove('open');
+            document.body.style.overflow = '';
         });
     });
 
@@ -24,9 +96,101 @@ document.addEventListener('DOMContentLoaded', function () {
             var target = document.querySelector(this.getAttribute('href'));
             if (target) {
                 e.preventDefault();
-                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                var offset = 80;
+                var targetPos = target.getBoundingClientRect().top + window.scrollY - offset;
+                window.scrollTo({ top: targetPos, behavior: 'smooth' });
             }
         });
+    });
+
+    // ─── Ripple Effect ───
+    document.querySelectorAll('.ripple-btn').forEach(function (btn) {
+        btn.addEventListener('click', function (e) {
+            var rect = btn.getBoundingClientRect();
+            var ripple = document.createElement('span');
+            ripple.className = 'ripple';
+            var size = Math.max(rect.width, rect.height);
+            ripple.style.width = ripple.style.height = size + 'px';
+            ripple.style.left = (e.clientX - rect.left - size / 2) + 'px';
+            ripple.style.top = (e.clientY - rect.top - size / 2) + 'px';
+            btn.appendChild(ripple);
+            ripple.addEventListener('animationend', function () { ripple.remove(); });
+        });
+    });
+
+    // ─── 3D Tilt Effect ───
+    document.querySelectorAll('.tilt-card').forEach(function (card) {
+        card.addEventListener('mousemove', function (e) {
+            var rect = card.getBoundingClientRect();
+            var x = e.clientX - rect.left;
+            var y = e.clientY - rect.top;
+            var centerX = rect.width / 2;
+            var centerY = rect.height / 2;
+            var rotateX = ((y - centerY) / centerY) * -8;
+            var rotateY = ((x - centerX) / centerX) * 8;
+            card.style.transform = 'perspective(800px) rotateX(' + rotateX + 'deg) rotateY(' + rotateY + 'deg) scale3d(1.02, 1.02, 1.02)';
+        });
+
+        card.addEventListener('mouseleave', function () {
+            card.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+        });
+    });
+
+    // ─── Reading Progress Bar ───
+    var progressBar = document.getElementById('progressBar');
+
+    function updateProgress() {
+        if (progressBar) {
+            var scrollTop = window.scrollY;
+            var docHeight = document.documentElement.scrollHeight - window.innerHeight;
+            var progress = (scrollTop / docHeight) * 100;
+            progressBar.style.width = progress + '%';
+        }
+    }
+
+    window.addEventListener('scroll', updateProgress, { passive: true });
+
+    // ─── Back to Top ───
+    var backToTop = document.getElementById('backToTop');
+
+    function handleBackToTop() {
+        if (backToTop) {
+            if (window.scrollY > 400) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        }
+    }
+
+    window.addEventListener('scroll', handleBackToTop, { passive: true });
+
+    if (backToTop) {
+        backToTop.addEventListener('click', function () {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+
+    // ─── Scroll Reveal with Stagger ───
+    var revealObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+                var delay = parseInt(entry.target.getAttribute('data-delay')) || 0;
+                setTimeout(function () {
+                    entry.target.classList.add('visible');
+                }, delay);
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(function (el) {
+        revealObserver.observe(el);
+    });
+
+    // Also observe product-card and gallery-item that have .reveal but may not have been caught
+    document.querySelectorAll('.product-card.reveal, .gallery-item.reveal').forEach(function (el) {
+        revealObserver.observe(el);
     });
 
     // ─── Lightbox ───
@@ -36,11 +200,14 @@ document.addEventListener('DOMContentLoaded', function () {
     var currentIndex = 0;
     var galleryImages = [];
 
-    document.querySelectorAll('.gallery-item img').forEach(function (img, index) {
-        galleryImages.push(img.src);
-        img.addEventListener('click', function () {
-            openLightbox(index);
-        });
+    document.querySelectorAll('.gallery-item:not(.gallery-video)').forEach(function (item, index) {
+        var img = item.querySelector('img');
+        if (img) {
+            galleryImages.push(img.src);
+            item.addEventListener('click', function () {
+                openLightbox(index);
+            });
+        }
     });
 
     function openLightbox(index) {
@@ -90,6 +257,52 @@ document.addEventListener('DOMContentLoaded', function () {
         if (e.key === 'ArrowLeft') prevImage();
         if (e.key === 'ArrowRight') nextImage();
     });
+
+    // ─── Lightbox Swipe Support ───
+    var touchStartX = 0;
+    var touchEndX = 0;
+
+    lightbox.addEventListener('touchstart', function (e) {
+        touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    lightbox.addEventListener('touchend', function (e) {
+        touchEndX = e.changedTouches[0].screenX;
+        var diff = touchStartX - touchEndX;
+        if (Math.abs(diff) > 50) {
+            if (diff > 0) nextImage();
+            else prevImage();
+        }
+    }, { passive: true });
+
+    // ─── Video Modal ───
+    var videoModal = document.getElementById('videoModal');
+    var videoFrame = document.getElementById('videoFrame');
+    var videoModalClose = document.getElementById('videoModalClose');
+
+    document.querySelector('.gallery-video')?.addEventListener('click', function () {
+        videoFrame.src = 'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1';
+        videoModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    });
+
+    if (videoModalClose) {
+        videoModalClose.addEventListener('click', closeVideoModal);
+    }
+
+    videoModal?.addEventListener('click', function (e) {
+        if (e.target === videoModal) closeVideoModal();
+    });
+
+    document.addEventListener('keydown', function (e) {
+        if (videoModal?.classList.contains('active') && e.key === 'Escape') closeVideoModal();
+    });
+
+    function closeVideoModal() {
+        videoModal.classList.remove('active');
+        videoFrame.src = '';
+        document.body.style.overflow = '';
+    }
 
     // ─── Form Validation & Submission ───
     var form = document.getElementById('contact-form');
@@ -192,23 +405,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function isValidEmail(email) {
         return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    }
-
-    // ─── Scroll Animations ───
-    var fadeElements = document.querySelectorAll('.fade-in');
-
-    if (fadeElements.length) {
-        var observer = new IntersectionObserver(function (entries) {
-            entries.forEach(function (entry) {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.15 });
-
-        fadeElements.forEach(function (el) {
-            observer.observe(el);
-        });
     }
 
 });
