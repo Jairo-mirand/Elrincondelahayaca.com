@@ -345,19 +345,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 body: formData,
                 headers: { 'Accept': 'application/json' }
             })
-            .then(function (response) {
-                if (response.ok) {
+            .then(function (response) { return response.json(); })
+            .then(function (data) {
+                if (data.success) {
                     form.reset();
                     form.style.display = 'none';
                     formSuccess.classList.add('visible');
                 } else {
-                    response.json().then(function (data) {
-                        if (Object.hasOwn(data, 'errors')) {
-                            alert(data.errors.map(function (error) { return error.message; }).join(', '));
-                        } else {
-                            alert('Ocurrió un error al enviar el mensaje. Intenta de nuevo.');
-                        }
-                    });
+                    alert(data.message || 'Ocurrió un error al enviar el mensaje. Intenta de nuevo.');
                 }
             })
             .catch(function () {
