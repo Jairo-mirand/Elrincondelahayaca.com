@@ -76,17 +76,17 @@ img { display: block; max-width: 100%; }
     left: 0;
     right: 0;
     z-index: 1000;
-    padding: 20px 0;
+    padding: 10px 0;
+    background: rgba(59,42,26,0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 4px 30px rgba(0,0,0,0.2);
+    border-bottom: 1px solid rgba(245,236,215,0.08);
     transition: all var(--transition);
 }
 
 .navbar.scrolled {
-    background: rgba(59,42,26,0.92);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    padding: 12px 0;
-    box-shadow: 0 4px 30px rgba(0,0,0,0.2);
-    border-bottom: 1px solid rgba(245,236,215,0.08);
+    padding: 8px 0;
 }
 
 .navbar .container {
@@ -226,6 +226,26 @@ img { display: block; max-width: 100%; }
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+.hero-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+    z-index: 0;
+}
+
+.hero-slide.active {
+    opacity: 1;
+}
+
+.slide-banner img {
+    object-fit: cover;
+    object-position: center 20%;
 }
 
 .hero-overlay {
@@ -638,6 +658,7 @@ img { display: block; max-width: 100%; }
     width: 100%;
     height: 100%;
     object-fit: cover;
+    object-position: center 70%;
     display: block;
     transition: transform 0.6s ease;
 }
@@ -776,7 +797,7 @@ img { display: block; max-width: 100%; }
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 40px;
-    align-items: center;
+    align-items: stretch;
     position: relative;
     z-index: 1;
 }
@@ -860,6 +881,7 @@ img { display: block; max-width: 100%; }
 
 .combo-cta {
     text-align: center;
+    grid-column: 1 / -1;
 }
 
 .combo-cta p {
@@ -1099,12 +1121,13 @@ img { display: block; max-width: 100%; }
     max-width: 800px;
 }
 
-.video-modal-content iframe {
+.video-modal-content video {
     width: 100%;
     aspect-ratio: 16/9;
     border: none;
     border-radius: 12px;
     box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+    background: #000;
 }
 
 .video-modal-close {

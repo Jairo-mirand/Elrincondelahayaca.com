@@ -275,14 +275,26 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }, { passive: true });
 
+    // ─── Hero Slider ───
+    var slides = document.querySelectorAll('.hero-slide');
+    if (slides.length > 0) {
+        var currentSlide = 0;
+        setInterval(function () {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }, 5000);
+    }
+
     // ─── Video Modal ───
     var videoModal = document.getElementById('videoModal');
-    var videoFrame = document.getElementById('videoFrame');
+    var videoEl = document.getElementById('videoFrame');
     var videoModalClose = document.getElementById('videoModalClose');
 
     document.querySelector('.gallery-video')?.addEventListener('click', function () {
-        videoFrame.src = 'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1';
         videoModal.classList.add('active');
+        videoEl.currentTime = 0;
+        videoEl.play();
         document.body.style.overflow = 'hidden';
     });
 
@@ -300,7 +312,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function closeVideoModal() {
         videoModal.classList.remove('active');
-        videoFrame.src = '';
+        videoEl.pause();
         document.body.style.overflow = '';
     }
 
